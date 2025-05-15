@@ -2,7 +2,7 @@
 
 //.the popover itself
 .popup-menu-boxpointer {
-  -arrow-rise: $space-size; // distance from the panel & screen edge
+  -arrow-rise: $space-size / 2; // distance from the panel & screen edge
   background: none; // needs to reset?
 }
 

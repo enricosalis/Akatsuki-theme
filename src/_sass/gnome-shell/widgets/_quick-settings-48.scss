@@ -1,10 +1,11 @@
 
 $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
+$quick-settings-radius: $material-radius + $space-size / 2;
 
 .quick-settings {
   padding: $space-size * 3 !important;
-  border-radius: 8px + $space-size * 5 !important;
-  margin-top: $space-size / 2 !important;
+  border-radius: $quick-settings-radius !important;
+  margin: 0 !important; // distance from the quick-settings panel & screen edge. See also .popup-menu-boxpointer
   border: none;
 
   .icon-button, .button {
@@ -22,7 +23,7 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
 }
 
 .quick-toggle, .quick-toggle-has-menu {
-  border-radius: $circular-radius;
+  border-radius: $quick-settings-radius;
   min-width: if($compact == 'false', 12em, 10.5em);
   max-width: if($compact == 'false', 12em, 10.5em);
   min-height: $toggle-height;
@@ -55,7 +56,7 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
     }
   }
 
-  & > StBoxLayout { spacing: $space-size; }
+  & > StBoxLayout { spacing: $space-size * 2; }
 
   /* Move padding into the box; this is to allow menu arrows
      to extend to the border */
@@ -68,7 +69,7 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
 
   & StBoxLayout > .quick-toggle-subtitle {
     font-weight: normal;
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .quick-toggle-icon { icon-size: $base-icon-size; }
@@ -79,13 +80,13 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
     min-width: auto;
     max-width: auto;
 
-    &:ltr { border-radius: $circular-radius 0 0 $circular-radius; }
+    &:ltr { border-radius: $quick-settings-radius 0 0 $quick-settings-radius; }
     &:ltr > StBoxLayout { padding-right: 0; }
-    &:rtl { border-radius: 0 $circular-radius $circular-radius 0; }
+    &:rtl { border-radius: 0 $quick-settings-radius $quick-settings-radius 0; }
     &:rtr > StBoxLayout { padding-left: 0; }
 
-    &:ltr:last-child { border-radius: $circular-radius; }
-    &:rtl:last-child { border-radius: $circular-radius; }
+    &:ltr:last-child { border-radius: $quick-settings-radius; }
+    &:rtl:last-child { border-radius: $quick-settings-radius; }
   }
 
   .quick-toggle-menu-button {
@@ -116,8 +117,8 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
       }
     }
 
-    &:ltr { border-radius: 0 $circular-radius $circular-radius 0; }
-    &:rtl { border-radius: $circular-radius 0 0 $circular-radius; }
+    &:ltr { border-radius: 0 $quick-settings-radius $quick-settings-radius 0; }
+    &:rtl { border-radius: $quick-settings-radius 0 0 $quick-settings-radius; }
   }
 
   .quick-toggle-separator {
@@ -147,7 +148,7 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
 }
 
 .quick-toggle-menu {
-  border-radius: $space-size * 5 !important;
+  border-radius: $quick-settings-radius !important;
   padding: $space-size * 2;
   margin: $space-size * 2 $space-size * 3.5 0;
 
@@ -172,7 +173,7 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
 
   .popup-menu-item {
     padding: $space-size + 2px !important;
-    border-radius: $circular-radius !important;
+    border-radius: $quick-settings-radius !important;
 
     @if $submenu_style == 'true' {
       color: $text-secondary !important;
@@ -245,9 +246,9 @@ $toggle-height: $space-size * 4 + $margin-size + $base-icon-size;
     padding-bottom: 2 * $space-size;
 
     & .icon {
-      icon-size: 24px; // a non-standard symbolic size but ok
+      icon-size: 16px; // a non-standard symbolic size but ok
       border-radius: $circular-radius;
-      padding: 1.5 * $space-size;
+      padding: 1.25 * $space-size;
       background-color: rgba(black, 0.08) !important;
 
       &.active {
