@@ -257,6 +257,10 @@ while [[ "$#" -gt 0 ]]; do
             icon='-default'
             shift
             ;;
+          akatsuki)
+            icon='-akatsuki'
+            shift
+            ;;
           apple)
             icon='-apple'
             shift
