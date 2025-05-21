@@ -116,11 +116,11 @@ $panel_button_hpadding: ($panel_height - $base-icon-size) / 2;
       // we want to exclude the do-not-disturb indicator from the background
       &.clock-display {
         box-shadow: none;
-        background-color: transparent;
+        background-color: transparent !important;
 
         .clock {
           box-shadow: none;
-          background-color: transparent !important;
+          background-color: if($variant == 'dark', rgba(black, 0.3), rgba(white, 0.3)) !important;
         }
       }
     }
