@@ -13,7 +13,6 @@ OPTIONS:
 
   -t, --theme VARIANT     Specify theme color variant(s) [default|purple|pink|red|orange|yellow|green|teal|grey|all] (Default: blue)
   -c, --color VARIANT     Specify color variant(s) [standard|light|dark] (Default: All variants)s)
-  -s, --size VARIANT      Specify size variant [standard|compact] (Default: All variants)
 
   -i, --icon VARIANT      Specify icon variant(s) for shell panel activities button
                           [default|apple|simple|gnome|ubuntu|arch|manjaro|fedora|debian|void|opensuse|popos|mxlinux|zorin|endeavouros|tux|nixos|gentoo|budgie|solus]
@@ -23,21 +22,9 @@ OPTIONS:
   -f, --fixed             Fixed accent(blue) color for gnome-shell >= 47 libadwaita theme
 
   --tweaks                Specify versions for tweaks [solid|compact|black|primary|macos|submenu|(nord/dracula)] (Options can mix)
-                          1. solid              No transparency panel variant
-                          2. compact            No floating panel variant
-                          3. black              Full black variant
-                          4. primary            Change radio icon checked color to primary theme color (Default is Green)
-                          5. macos              Change window buttons to MacOS style
-                          6. submenu            Set normal submenus color contrast (dark submenu style on dark version)
-                          7. [nord|dracula]     Nord/dracula colorscheme themes (nord and dracula can not mix use!)
-                          8. dock               Fix style for 'dash-to-dock' or 'ubuntu-dock' extension
-
-  --round                 Change theme round corner border-radius [Input the px value you want] (Suggested: 2px < value < 16px)
-                          1. 3px
-                          2. 4px
-                          3. 5px
-                          ...
-                          13. 15px
+                          1. primary            Change radio icon checked color to primary theme color (Default is Green)
+                          2. macos              Change window buttons to MacOS style
+                          3. dock               Fix style for 'dash-to-dock' or 'ubuntu-dock' extension
 
   --shell                 install gnome-shell version [38|40|42|44|46] (Without this option script will detect shell version and install the right theme)
                           1. 38                 Gnome-shell version <= 38.0
@@ -63,6 +50,10 @@ ocolors=()
 osizes=()
 lcolors=()
 
+submenu="true"
+round="true"
+corner="6px"
+
 while [[ "$#" -gt 0 ]]; do
   case "${1:-}" in
     -d|--dest)
@@ -85,12 +76,6 @@ while [[ "$#" -gt 0 ]]; do
     -f|--fixed)
       fixed="true"
       shift
-      ;;
-    --round)
-      round="true"
-      corner="$2"
-      echo -e "Change round corner ${corner} value ..."
-      shift 2
       ;;
     --shell)
       shift
@@ -139,21 +124,6 @@ while [[ "$#" -gt 0 ]]; do
       shift
       for variant in $@; do
         case "$variant" in
-          solid)
-            opacity="solid"
-            echo -e "Install solid version ..."
-            shift
-            ;;
-          compact)
-            panel="compact"
-            echo -e "Install compact panel version ..."
-            shift
-            ;;
-          black)
-            blackness="true"
-            echo -e "Install black version ..."
-            shift
-            ;;
           primary)
             primary="true"
             echo "Change radio and check assets color ..."
@@ -162,11 +132,6 @@ while [[ "$#" -gt 0 ]]; do
           macos)
             macstyle="true"
             echo -e "Install MacOS style window button version ..."
-            shift
-            ;;
-          submenu)
-            submenu="true"
-            echo -e "Install with themed sub-menus ..."
             shift
             ;;
           nord)
@@ -277,29 +242,6 @@ while [[ "$#" -gt 0 ]]; do
             ;;
           *)
             echo "ERROR: Unrecognized color variant '$1'."
-            echo "Try '$0 --help' for more information."
-            exit 1
-            ;;
-        esac
-      done
-      ;;
-    -s|--size)
-      shift
-      for variant in "$@"; do
-        case "$variant" in
-          standard)
-            sizes+=("${SIZE_VARIANTS[0]}")
-            shift
-            ;;
-          compact)
-            sizes+=("${SIZE_VARIANTS[1]}")
-            shift
-            ;;
-          -*)
-            break
-            ;;
-          *)
-            echo "ERROR: Unrecognized size variant '$1'."
             echo "Try '$0 --help' for more information."
             exit 1
             ;;
@@ -424,7 +366,7 @@ if [[ "${#colors[@]}" -eq 0 ]] ; then
 fi
 
 if [[ "${#sizes[@]}" -eq 0 ]] ; then
-  sizes=("${SIZE_VARIANTS[@]}")
+  sizes=("${SIZE_VARIANTS[0]}")
 fi
 
 if [[ "${#lcolors[@]}" -eq 0 ]] ; then
