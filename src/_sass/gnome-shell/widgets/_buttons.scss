@@ -47,7 +47,7 @@
   min-height: $base-icon-size;
   min-width: $base-icon-size;
   padding: $space-size * 2;
-  border-radius: $circular-radius;
+  border-radius: $material-radius;
   border: none;
 
   @include button(flat-normal);
